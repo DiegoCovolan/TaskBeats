@@ -1,4 +1,4 @@
-package com.comunidadedevspace.taskbeats
+package com.comunidadedevspace.taskbeats.presentation
 
 import android.app.Activity
 import androidx.activity.result.ActivityResult
@@ -12,11 +12,13 @@ import android.widget.LinearLayout
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
+import com.comunidadedevspace.taskbeats.R
+import com.comunidadedevspace.taskbeats.data.AppDataBase
+import com.comunidadedevspace.taskbeats.data.Task
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import java.io.Serializable
 
@@ -36,7 +38,7 @@ class MainActivity : AppCompatActivity() {
 
     //Adapter
     //val list = listOf<String>("Title 1", "Title 2", "Title 3")
-    private val adapter: TaskListAdapter by lazy {TaskListAdapter (::onListItemClicked)  }
+    private val adapter: TaskListAdapter by lazy { TaskListAdapter (::onListItemClicked)  }
 
     //BASE DE DADOSS
     private val dataBase by lazy {
@@ -224,7 +226,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun openTaskListDetail(task: Task? = null) { // Essa tarefa pode existir como pode não existir, posso colocar q ela ja não existe com o "null"
         //"(task: Task? = null)" é um DEFAULT ARGUMENT, isso significa que posso passar uma tarefa sem colocar nada dentro como no caso da linha 84 "openTaskListDetail()"
-        val intent = TaskDetailActivity.start(this, task)//Quero dar um start na TaskDetailActivity, passo quem é vc this, para a task e eu vou te dar uma intenção e vc consegue abrir
+        val intent = TaskDetailActivity.start(
+            this,
+            task
+        )//Quero dar um start na TaskDetailActivity, passo quem é vc this, para a task e eu vou te dar uma intenção e vc consegue abrir
         startForResult.launch(intent)
     }
 

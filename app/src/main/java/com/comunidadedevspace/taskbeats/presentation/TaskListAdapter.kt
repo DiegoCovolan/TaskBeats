@@ -1,18 +1,21 @@
-package com.comunidadedevspace.taskbeats
+package com.comunidadedevspace.taskbeats.presentation
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListAdapter
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.comunidadedevspace.taskbeats.R
+import com.comunidadedevspace.taskbeats.data.Task
 
 
 class TaskListAdapter(                                                  // private val listTask : List<Task>,     tiramos a lista do construtor do adapter, pq essa lista nao existe no momento mas ela vai existir em algum momento por isso o lateinit var
 /*CALLBACK*/ private val openTaskDetailView: (task: Task) -> Unit
 //Cuidado ao selecionar o preenchimento automatico do CODIGO pois pode selecionar o mesmo NOME porem com OUTRA FUNÇÃO!
-                    ) : androidx.recyclerview.widget.ListAdapter<Task, TaskListViewHolder>(TaskListAdapter)  {
+                    ) : androidx.recyclerview.widget.ListAdapter<Task, TaskListViewHolder>(
+    TaskListAdapter
+)  {
 
     /*
     private var listTask: List<Task> = emptyList()
