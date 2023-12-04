@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".presentation.MainActivity">
+    tools:context=".presentation.TaskListActivity">
 
     <include layout="@layout/toolbar"/>
 
@@ -37,7 +37,7 @@
 
 
     <LinearLayout
-    android:id="@+id/ctn_Content"
+    android:id="@+id/ctn_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_constraintBottom_toBottomOf="parent"
