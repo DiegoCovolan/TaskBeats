@@ -2,15 +2,20 @@ package com.comunidadedevspace.taskbeats.presentation
 
 import android.app.Application
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.ServiceLifecycleDispatcher
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.comunidadedevspace.taskbeats.TaskBeatsApplication
 import com.comunidadedevspace.taskbeats.data.Task
 import com.comunidadedevspace.taskbeats.data.TaskDao
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class TaskListViewModel(private val taskDao: TaskDao): ViewModel() {
+class TaskListViewModel(
+    private val taskDao: TaskDao,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+    ): ViewModel() {
 
     //Livedata no ViewModel
     val taskListLiveData: LiveData<List<Task>> = taskDao.getAll()
@@ -38,21 +43,21 @@ class TaskListViewModel(private val taskDao: TaskDao): ViewModel() {
 
     //CREATE
     private fun insertintoDataBase(task: Task){
-        viewModelScope.launch (Dispatchers.IO){
+        viewModelScope.launch (dispatcher){
             taskDao.insert(task)
         }
     }
 
     //UPDATE
     private fun updateintoDataBase(task: Task){
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatcher) {
             taskDao.update(task)
         }
     }
 
     //DELETE ALL
     private fun deleteAll(){
-        viewModelScope.launch (Dispatchers.IO){
+        viewModelScope.launch (dispatcher){
             taskDao.deleteAll()
             //   listFromDataBase() isso vai atualizar a lista no adapter, se não trabalhar em serie a thread pode não atualizar na hora
         }
